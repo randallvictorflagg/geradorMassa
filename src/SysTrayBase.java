@@ -26,7 +26,7 @@ public class SysTrayBase {
 		
 		GeraCPF cpf= new GeraCPF(); 
 		GeraRUT rut = new GeraRUT();
-		
+		listaCartoes lista = new listaCartoes();
 		final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
                 new TrayIcon(createImage("images/bulb.gif", "tray icon"));
@@ -49,9 +49,12 @@ public class SysTrayBase {
           MenuItem chileMaster = new MenuItem("MasterCard");
           MenuItem chileVisa = new MenuItem("VISA");
           MenuItem chileAmex = new MenuItem("AMEX");
+          MenuItem chileDiners = new MenuItem("Diners");
           MenuItem argentinaMaster = new MenuItem("MasterCard");
           MenuItem argentinaVisa = new MenuItem("VISA");
           MenuItem argentinaAmex = new MenuItem("AMEX");
+          MenuItem argentinaDiners = new MenuItem("Diners");
+
 //        MenuItem noneItem = new MenuItem("None");
 //        MenuItem exitItem = new MenuItem("Exit");
        
@@ -73,9 +76,11 @@ menuCartaoBrasil.add(brasilAmex);
 menuCartaoChile.add(chileMaster);
 menuCartaoChile.add(chileVisa);
 menuCartaoChile.add(chileAmex);
+menuCartaoChile.add(chileDiners);
 menuCartaoArgentina.add(argentinaMaster);
 menuCartaoArgentina.add(argentinaVisa);
 menuCartaoArgentina.add(argentinaAmex);
+menuCartaoArgentina.add(argentinaDiners);
 //        popup.add(exitItem);
        
         trayIcon.setPopupMenu(popup);
@@ -181,6 +186,16 @@ menuCartaoArgentina.add(argentinaAmex);
                         trayIcon.displayMessage("Master Chile", "Copiado para a área de transferência.", TrayIcon.MessageType.INFO);
                     }
                 });
+        chileDiners.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) 
+                    { 
+                        System.out.println("chileDiners");
+                        StringSelection stringSelection = new StringSelection(lista.retornaDiners());
+                        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clpbrd.setContents(stringSelection, null);
+                        trayIcon.displayMessage("Diners Chile", "Copiado para a área de transferência.", TrayIcon.MessageType.INFO);
+                    }
+                });
 
         argentinaVisa.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) 
@@ -210,6 +225,16 @@ menuCartaoArgentina.add(argentinaAmex);
                         Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                         clpbrd.setContents(stringSelection, null);
                         trayIcon.displayMessage("AMEX Argentina", "Copiado para a área de transferência.", TrayIcon.MessageType.INFO);
+                    }
+                });
+        argentinaDiners.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) 
+                    { 
+                        System.out.println("argentinaDiners");
+                        StringSelection stringSelection = new StringSelection(lista.retornaDiners());
+                        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clpbrd.setContents(stringSelection, null);
+                        trayIcon.displayMessage("Diners Argentina", "Copiado para a área de transferência.", TrayIcon.MessageType.INFO);
                     }
                 });
         
