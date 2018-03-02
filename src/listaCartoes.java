@@ -57,7 +57,7 @@ public String retornaDiners(){
         "38679402573486"};
     Random gerador = new Random();
     
-    return diners[49];
+    return diners[gerador.nextInt(49)];
 }
 
     
